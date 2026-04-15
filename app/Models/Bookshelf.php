@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Bookshelf extends Model
 {
@@ -14,5 +15,10 @@ class Bookshelf extends Model
         'name'
     ]
 
-    
+    // relasi one to many dengan model Book
+    // satu rak buku memiliki banyak buku
+    public function books() : HasMany
+    {
+        return $this->HasMany(Book::class, 'bookshelf_id', 'id');
+    }
 }
