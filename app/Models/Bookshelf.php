@@ -13,12 +13,12 @@ class Bookshelf extends Model
     protected $fillable = [
         'code',
         'name'
-    ]
+    ];
 
     // relasi one to many dengan model Book
     // satu rak buku memiliki banyak buku
     public function books() : HasMany
     {
-        return $this->HasMany(Book::class, 'bookshelf_id', 'id');
+        return $this->hasMany(Book::class, 'bookshelf_id', 'id');
     }
 }

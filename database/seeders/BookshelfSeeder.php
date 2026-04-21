@@ -13,7 +13,7 @@ class BookshelfSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('bookshelf')->insert([
+        DB::table('bookshelves')->insert([
             'code' => 'jh12g',
             'name' => 'Lemari 1'
         ]);

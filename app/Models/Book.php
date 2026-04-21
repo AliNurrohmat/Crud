@@ -15,7 +15,7 @@ class Book extends Model
         'city',
         'cover',
         'bookshelf_id'
-    ]
+    ];
 
     // relasi many to one dengan model Bookshelf
     // banyak buku berada di 1 rak
