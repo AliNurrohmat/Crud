@@ -1,6 +1,5 @@
 <div>
-    <!-- Waste no more time arguing what a good man should be, be one. - Marcus Aurelius -->
     <button class="btn btn-primary">
-        {{  $slot }}
+        {{ $slot }}
     </button>
 </div>
