@@ -24,6 +24,7 @@
                                 <th>Kota</th>
                                 <th>Cover</th>
                                 <th>Kode Rak</th>
+                                <th>Aksi</th>   
                             </tr>
                         </x-slot>
                     @php $num=1; @endphp
@@ -36,9 +37,24 @@
                             <td>{{ $book->publisher }}</td>
                             <td>{{ $book->city }}</td>
                             <td>
-                                <img src="{{ asset('storage/cover_buku/'.$book->cover) }}" width="100px"/>
+                                <img src="{{ asset('storage/cover_buku/'.$book->cover) }}" width="100px" alt="Cover"/>
                             </td>
                             <td>{{ $book->bookshelf->code }}-{{ $book->bookshelf->name }}</td>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <x-primary-button tag="a" href="">
+                                        Edit
+                                    </x-primary-button>
+
+                                    <form action="" method="post" onsubmit="return confirm('Apakah anda yakin?');">
+                                        @csrf
+                                        @method('delete')    
+                                        <x-danger-button type="submit">
+                                            Hapus
+                                        </x-danger-button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                     </x-table>

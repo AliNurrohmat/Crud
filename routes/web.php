@@ -20,7 +20,10 @@ Route::middleware('auth')->group(function () {
 
 // middleware untuk memastikan hanya pengguna yang sudah login yang bisa akses
 Route::middleware('auth')->group(function () {
+    // lihat
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
+
+    // tambah
     Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
 });

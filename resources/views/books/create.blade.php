@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <x-secondary-button tag="a" href="">Cancel</x-secondary-button>
+                        <x-secondary-button tag="a" href="{{ route('books.index')}}">Cancel</x-secondary-button>
                         <x-primary-button name="save_and_create" value="true">Save & Create Another</x-primary-button>
                         <x-primary-button name="save" value="true">Save</x-primary-button>
                     </div>
