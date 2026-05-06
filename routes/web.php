@@ -26,6 +26,10 @@ Route::middleware('auth')->group(function () {
     // tambah
     Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
+
+    // edit
+    Route::get('/books/{id}', [BookController::class, 'edit'])->name('books.edit');
+    Route::patch('/books/{id}', [BookController::class, 'update'])->name('books.update');
 });
 
 require __DIR__.'/auth.php';

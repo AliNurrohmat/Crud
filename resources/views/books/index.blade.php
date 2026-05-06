@@ -42,7 +42,7 @@
                             <td>{{ $book->bookshelf->code }}-{{ $book->bookshelf->name }}</td>
                             <td>
                                 <div class="flex items-center gap-2">
-                                    <x-primary-button tag="a" href="">
+                                    <x-primary-button tag="a" href="{{ route('books.edit', $book->id) }}">
                                         Edit
                                     </x-primary-button>
 

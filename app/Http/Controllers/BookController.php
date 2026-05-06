@@ -41,6 +41,23 @@ class BookController extends Controller
             'bookshelf_id' => 'required',
             'cover' => 'nullable|image',
         ]);
+
+        if($request->hasFile('cover')){
+            $path = $request->file('cover')->storeAs(
+                'cover_buku',
+                'cover_buku'.time().'.'.$request->file('cover')->extension(), 'public'
+            );
+            $validated['cover'] = basename($path);
+        }
+
+        Book::create($validated);
+
+        $notif = array(
+            'message' => 'Data Buku Berhasil Ditambahkan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('books.index')->with($notif);
         
     }
 
@@ -57,7 +74,10 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['book'] = Book::findOrFail($id);
+        $data['bookshelves'] = Bookshelf::pluck('name', 'id');
+
+        return view('books.update', $data);
     }
 
     /**
@@ -65,7 +85,36 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // lakukan validasi
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required|max:150',
+            'year' => 'required|digits:4|integer|min:1900|max:'.(date('Y')),
+            'publisher' => 'required|max:100',
+            'city' => 'required|max:75',
+            'bookshelf_id' => 'required',
+            'cover' => 'nullable|image',
+        ]);
+
+        $book = Book::findOrFail($id);
+
+        if($request->hasFile('cover')){
+            $file = $request->file('cover');
+            $filename = 'cover_buku'.time().'.'.$file->extension();
+            $file->storeAs('cover_buku', $filename, 'public');
+            $validated['cover'] = $filename;
+        }else{
+            $validated['cover'] = $book->cover;
+        }
+
+        $book->updated($validated);
+
+        $notif = array(
+            'message' => 'Data Buku Berhasil DiUpdate',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('books.index')->with($notif);
     }
 
     /**
