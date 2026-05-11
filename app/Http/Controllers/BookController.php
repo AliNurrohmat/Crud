@@ -107,7 +107,7 @@ class BookController extends Controller
             $validated['cover'] = $book->cover;
         }
 
-        $book->updated($validated);
+        $book->update($validated);
 
         $notif = array(
             'message' => 'Data Buku Berhasil DiUpdate',
@@ -122,6 +122,17 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+{
+    $book = Book::findOrFail($id);
+
+    $book->delete();
+
+    $notif = array(
+        'message' => 'Data Buku Berhasil Dihapus',
+        'alert-type' => 'success'
+    );
+
+    return redirect()->route('books.index')->with($notif);
+}
     }
 }

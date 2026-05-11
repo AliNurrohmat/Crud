@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
     // edit
     Route::get('/books/{id}', [BookController::class, 'edit'])->name('books.edit');
     Route::patch('/books/{id}', [BookController::class, 'update'])->name('books.update');
+
+     // hapus
+    Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
 });
 
 require __DIR__.'/auth.php';

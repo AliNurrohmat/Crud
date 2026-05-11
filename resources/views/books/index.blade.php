@@ -46,7 +46,7 @@
                                         Edit
                                     </x-primary-button>
 
-                                    <form action="" method="post" onsubmit="return confirm('Apakah anda yakin?');">
+                                    <form action="{{ route('books.destroy', $book->id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin?');">
                                         @csrf
                                         @method('delete')    
                                         <x-danger-button type="submit">
