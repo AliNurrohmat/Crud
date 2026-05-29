@@ -1,26 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar User</title>
-</head>
-<body>
-    <table border="1">
-        <thead>
-            <th>NPM</th>
-            <th>Nama Lengkap</th>
-            <th>Email</th>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-                <tr>
-                    <td>{{ $user->npm }}</td>
-                    <td>{{ $user->fullName }}</td>
-                    <td>{{ $user->email }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</body>
-</html>
+<tbody>
+    @foreach($books as $book)
+        <tr>
+            <td>{{ $book->title }}</td>
+
+            <td>
+                <div class="flex items-center gap-2">
+
+                    <x-primary-button tag="a" href="{{ route('books.edit', $book->id) }}">
+                        Edit
+                    </x-primary-button>
+
+                    <x-primary-button tag="a" href="{{ route('books.show', $book->id) }}">
+                        Detail
+                    </x-primary-button>
+
+                    <form action="{{ route('books.destroy', $book->id) }}" method="POST"
+                          onsubmit="return confirm('Apakah anda yakin?');">
+                        @csrf
+                        @method('delete')
+
+                        <x-danger-button type="submit">
+                            Hapus
+                        </x-danger-button>
+                    </form>
+
+                </div>
+            </td>
+        </tr>
+    @endforeach
+</tbody>

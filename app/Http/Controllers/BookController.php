@@ -64,9 +64,13 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
+        /**
+     * Display the specified resource.
+     */
     public function show(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -121,7 +125,6 @@ class BookController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
 {
     $book = Book::findOrFail($id);
 
@@ -133,6 +136,7 @@ class BookController extends Controller
     );
 
     return redirect()->route('books.index')->with($notif);
-}
     }
 }
+    
+

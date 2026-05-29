@@ -5,33 +5,38 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/books');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-// middleware untuk memastikan hanya pengguna yang sudah login yang bisa akses
-Route::middleware('auth')->group(function () {
-    // lihat
+    // =========================
+    // BOOK ROUTES (URUTAN PENTING)
+    // =========================
+
+    // index
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
-    // tambah
+    // create (WAJIB DI ATAS {id})
     Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
+
+    // show
+    Route::get('/books/{id}/show', [BookController::class, 'show'])->name('books.show');
 
     // edit
     Route::get('/books/{id}', [BookController::class, 'edit'])->name('books.edit');
     Route::patch('/books/{id}', [BookController::class, 'update'])->name('books.update');
 
-     // hapus
+    // delete
     Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
 });
 
